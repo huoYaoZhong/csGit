@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./lib/index.js"></script>
+    <script>
+
+
+    window.onload = () => {
+        this.init();
+    }
+
+    function init() {
+        const ctx = document.getElementById('webglCanvas');
+        const gl = ctx.getContext('webgl');
+        // 着色器
+        // 创建着色器源码
+        //顶点着色器
+        const VERTEX_SHADER_SOURCE = `
+            attribute vec4 aPosition;
+            void main() {
+                gl_Position = aPosition;
+                gl_PointSize = 30.0;
+            }
+        `;
+        // 片元着色器
+        const FRAGMENT_SHADER_SOURCE = `
+            void main() {
+                gl_FragColor = vec4(1.0,0.0,0.0,1.0);
+            }
+        `;
+        const program = initShader(gl, VERTEX_SHADER_SOURCE, FRAGMENT_SHADER_SOURCE);
+        // // 创建着色器
+        // const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+        // const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+        //
+        // gl.shaderSource(vertexShader, VERTEX_SHADER_SOURCE); // 指定顶点着色器的源码
+        // gl.shaderSource(fragmentShader, FRAGMENT_SHADER_SOURCE); // 指定片元着色器的源码
+        // // 编译着色器
+        // gl.compileShader(vertexShader);
+        // gl.compileShader(fragmentShader);
+        // // 创建一个程序对象
+        // const program = gl.createProgram();
+        // gl.attachShader(program, vertexShader);
+        // gl.attachShader(program, fragmentShader);
+        //
+        // gl.linkProgram(program);
+        // gl.useProgram(program);
+        const aPosition = gl.getAttribLocation(program, 'aPosition');
+
+
+        // 执行绘制
+        // 要绘制的图形是什么，从哪个开始 使用几个顶点
+        // gl.drawArrays(gl.POINTS, 0, 1);
+        // gl.drawArrays(gl.LINES,0,1);
+        // gl.drawArrays(gl.TRIANGLES,0,1);
+
+
+        let x = 0;
+        // setInterval(() => {
+        //     x += 0.1;
+        //     if (x > 1.0) {
+        //         x = 0;
+        //     }
+        //     gl.vertexAttrib1f(aPosition,x);
+        //     gl.drawArrays(gl.POINTS, 0, 1);
+        // }, 200);
+
+    }
+    </script>
+</head>
+<body>
+<canvas id="webglCanvas" width="500" height="500"></canvas>
+</body>
+
+</html>
